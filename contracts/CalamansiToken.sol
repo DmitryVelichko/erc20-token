@@ -11,4 +11,26 @@ contract CalamansiToken {
     address public ownerOfContract;
     address[] public holderToken;
 
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+    event Approval(
+        address indexed _owner,
+        address indexed _spender,
+        uint256 _value
+    );
+
+    mapping(address => TokenHolderInfo) public tokenHolderInfos;
+
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    struct TokenHolderInfo {
+        uint256 _tokenId;
+        address _from;
+        address _to;
+        uint256 _totalToken;
+        bool _tokenHolder;
+    }
+
+    mapping(address => uint256) public balanceOf;
+
   
