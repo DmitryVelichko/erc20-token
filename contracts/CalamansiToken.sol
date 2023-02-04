@@ -33,4 +33,22 @@ contract CalamansiToken {
 
     mapping(address => uint256) public balanceOf;
 
-  
+    constructor(uint256 _initialSupply) {
+        ownerOfContract = msg.sender;
+        balanceOf[msg.sender] = _initialSupply;
+        totalSupply = _initialSupply;
+    }
+
+    function inc() internal {
+        _userId++;
+    }
+
+    function transfer(address _to, uint256 _value)
+        public
+        returns (bool success)
+    {
+        require(balanceOf[msg.sender] >= _value);
+        inc();
+        balanceOf[msg.sender] -= _value;
+        balanceOf[_to] += _value;
+
