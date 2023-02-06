@@ -5,7 +5,7 @@ async function main() {
   
 
   const CalamansiToken = await hre.ethers.getContractFactory("CalamansiToken");
-  const calamansiToken = await CalamansiToken.deploy();
+  const calamansiToken = await CalamansiToken.deploy(1);
 
   await calamansiToken.deployed();
 

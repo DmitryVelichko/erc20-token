@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.22 <0.9.0;
+pragma solidity >=0.4.22 < 0.9.0;
 
 contract CalamansiToken {
     string public name = "CalamansiToken";
@@ -20,7 +20,7 @@ contract CalamansiToken {
     );
 
     mapping(address => TokenHolderInfo) public tokenHolderInfos;
-
+    mapping(address => uint256) public balanceOf;
     mapping(address => mapping(address => uint256)) public allowance;
 
     struct TokenHolderInfo {
@@ -30,8 +30,6 @@ contract CalamansiToken {
         uint256 _totalToken;
         bool _tokenHolder;
     }
-
-    mapping(address => uint256) public balanceOf;
 
     constructor(uint256 _initialSupply) {
         ownerOfContract = msg.sender;
@@ -113,7 +111,7 @@ contract CalamansiToken {
         );
     }
 
-    function getTokenHolder() public view returns(address[] memory) {
+    function getTokenHolder() public view returns (address[] memory) {
         return holderToken;
     }
 }
