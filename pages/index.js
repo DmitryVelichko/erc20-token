@@ -1,7 +1,11 @@
 import Head from 'next/head'
-
+import React, {useState, useEffect, useContext} from 'react'
+import Image from 'next/image'
+// INTERNAL IMPORT
+import {ERC20ICOContext} from '../context/CalamansiToken'
 
  const Home = () => {
+  const  {calamansiToken} = useContext(ERC20ICOContext)
   return (
     <>
       <Head>
@@ -10,7 +14,7 @@ import Head from 'next/head'
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>Home</div>
+      <div>{calamansiToken}</div>
       
     </>
   )
