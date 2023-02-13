@@ -66,8 +66,23 @@ export const ERC20Provider = ({ children }) => {
       const web3modal = new Web3Modal();
       const connection = await web3modal.connect();
       const provider = new ethers.providers.Web3Provider(connection);
-      const signer = provider.getSigner();
+      const signer = provider.getSigner("0x70997970C51812dc3A010C7d01b50e0d17dc79C8");
       const contract = fetchContractERC20(signer);
+
+      // TOKEN SUPPLY
+      const supply = await contract.totalSupply()
+      const totalSupply = supply.toNumber()
+      setNoOfToken(totalSupply)
+
+      // TOKEN NAME
+      const name = await contract.name()
+      setTokenName(name)
+
+      //TOKEN SYMBOL
+      const symbol = await contract.symbol()
+      setTokenSymbol(symbol)
+
+
     } catch (error) {
       console.log('Error in ERC20 token');
     }
