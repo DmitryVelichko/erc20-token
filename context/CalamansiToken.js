@@ -66,46 +66,46 @@ export const ERC20Provider = ({ children }) => {
       const web3modal = new Web3Modal();
       const connection = await web3modal.connect();
       const provider = new ethers.providers.Web3Provider(connection);
-      const signer = provider.getSigner("0x70997970C51812dc3A010C7d01b50e0d17dc79C8");
+      const signer = provider.getSigner(
+        '0x70997970C51812dc3A010C7d01b50e0d17dc79C8'
+      );
       const contract = fetchContractERC20(signer);
 
       // TOKEN SUPPLY
-      const supply = await contract.totalSupply()
-      const totalSupply = supply.toNumber()
-      setNoOfToken(totalSupply)
+      const supply = await contract.totalSupply();
+      const totalSupply = supply.toNumber();
+      setNoOfToken(totalSupply);
 
       // TOKEN NAME
-      const name = await contract.name()
-      setTokenName(name)
+      const name = await contract.name();
+      setTokenName(name);
 
       //TOKEN SYMBOL
-      const symbol = await contract.symbol()
-      setTokenSymbol(symbol)
+      const symbol = await contract.symbol();
+      setTokenSymbol(symbol);
 
       //TOKEN STANDARD
-      const standard = await contract.standard()
-      setTokenStandard(standard)
+      const standard = await contract.standard();
+      setTokenStandard(standard);
 
       //TOKEN OWNERCONTRACT
-      const ownerOfContract = await contract.ownerOfContract()
-      setTokenOwner(ownerOfContract)
+      const ownerOfContract = await contract.ownerOfContract();
+      setTokenOwner(ownerOfContract);
 
       //OWNER TOKEN BALANCE
-      const balanceToken = await contract.balanceOf('0x70997970C51812dc3A010C7d01b50e0d17dc79C8')
-      setTokenOwnerBal(balanceToken)
-      
-      
-      //TOKEN SYMBOL
-      //TOKEN SYMBOL
-
-
+      const balanceToken = await contract.balanceOf(
+        '0x70997970C51812dc3A010C7d01b50e0d17dc79C8'
+      );
+      setTokenOwnerBal(balanceToken);
     } catch (error) {
       console.log('Error in ERC20 token');
     }
   };
 
   return (
-    <ERC20ICOContext.Provider value={{ calamansiToken, checkConnection }}>
+    <ERC20ICOContext.Provider
+      value={{ calamansiToken, checkConnection, ERC20CalamansiToken }}
+    >
       {children}
     </ERC20ICOContext.Provider>
   );
