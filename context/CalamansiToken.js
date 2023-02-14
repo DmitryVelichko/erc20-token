@@ -102,9 +102,45 @@ export const ERC20Provider = ({ children }) => {
     }
   };
 
+  const transferToken = async(address, value) => {
+    try {
+      const web3modal = new Web3Modal();
+      const connection = await web3modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      const contract = fetchContractERC20(signer);
+
+      const transfer = await contract.transfer(address, BigInt(value * 1))
+      transfer.wait()
+      window.location.wait()
+    } catch (error) {
+      console.log('Something went wrong while transferring token')
+    }
+  }
+
+  //GET TOKEN HOLDER DATA
+  const tokenHolderData = async() => {
+    try {
+      const web3modal = new Web3Modal();
+      const connection = await web3modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      const contract = fetchContractERC20(signer);
+
+      const allTokenHolder = await contract.getTokenHolder()
+      allTokenHolder.map(async (el) => {
+        const singleHolderData = await contract.getTokenHolderData(el)
+        holderArray.push(singleHolderData)
+      })
+
+    } catch(error) {
+      console.log('Something went wrong while getting data')
+    }
+  }
+
   return (
     <ERC20ICOContext.Provider
-      value={{ calamansiToken, checkConnection, ERC20CalamansiToken }}
+      value={{ calamansiToken, checkConnection, ERC20CalamansiToken, transferToken }}
     >
       {children}
     </ERC20ICOContext.Provider>
