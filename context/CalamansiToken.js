@@ -82,6 +82,22 @@ export const ERC20Provider = ({ children }) => {
       const symbol = await contract.symbol()
       setTokenSymbol(symbol)
 
+      //TOKEN STANDARD
+      const standard = await contract.standard()
+      setTokenStandard(standard)
+
+      //TOKEN OWNERCONTRACT
+      const ownerOfContract = await contract.ownerOfContract()
+      setTokenOwner(ownerOfContract)
+
+      //OWNER TOKEN BALANCE
+      const balanceToken = await contract.balanceOf('0x70997970C51812dc3A010C7d01b50e0d17dc79C8')
+      setTokenOwnerBal(balanceToken)
+      
+      
+      //TOKEN SYMBOL
+      //TOKEN SYMBOL
+
 
     } catch (error) {
       console.log('Error in ERC20 token');
